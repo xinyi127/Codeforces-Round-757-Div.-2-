@@ -1,0 +1,57 @@
+/*
+0!='0'
+*/
+#include<queue>
+#include<stdio.h>
+#include<string.h>
+#include<stdlib.h>
+#include<algorithm>
+using namespace std;
+#define scnaf scanf
+#define ll long long
+const ll N=2e5+50;
+const ll M=2e9+50;
+ll a[N];
+struct ss
+{
+    ll a,i,b;//次数，序号，房子位置
+}s[N];
+bool cmp1(struct ss a,struct ss b)
+{
+    return a.a<b.a;
+}
+bool cmp2(struct ss a,struct ss b)
+{
+    return a.i<b.i;
+}
+int main()
+{
+    ll i,j,k,n,m,t,l,r,ans;
+    scnaf("%lld",&t);
+    while(t--)
+    {
+        scnaf("%lld",&n);
+        for(i=1;i<=n;i++)
+            scnaf("%lld",&s[i].a),s[i].i=i;
+        l=1,r=n+1;
+        sort(s+1,s+n+1,cmp1);
+        k=1;
+        while(k<=n)
+        {
+            if(k&1)
+                s[k++].b=r--;
+            else
+                s[k++].b=l++;
+        }
+        sort(s+1,s+n+1,cmp2);
+        ans=0;
+        n&1?(m=n+1>>1):(m=n+2>>1);
+        for(i=1;i<=n;i++)
+            ans+=abs(m-s[i].b)*s[i].a;
+        printf("%lld\n%lld ",ans*2,m);
+        for(i=1;i<=n;i++)
+            printf("%lld ",s[i].b);
+        printf("\n");
+    }
+    return 0;
+}

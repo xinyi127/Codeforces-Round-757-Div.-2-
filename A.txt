@@ -1,0 +1,40 @@
+/*
+0!='0'
+*/
+#include<queue>
+#include<stdio.h>
+#include<string.h>
+#include<stdlib.h>
+#include<algorithm>
+using namespace std;
+#define scnaf scanf
+#define ll long long
+const ll N=1e2+50;
+const ll M=2e9+50;
+ll a[N];
+int main()
+{
+    ll i,j,k,n,m,t,l,r,ans;
+    scnaf("%lld",&t);
+    while(t--)
+    {
+        memset(a,0,sizeof(a));
+        ans=0;
+        scnaf("%lld%lld%lld%lld",&n,&l,&r,&k);
+        for(i=1,j=0;i<=n;i++)
+        {
+            scnaf("%lld",&m);
+            if(m<=r&&m>=l)
+                a[++j]=m;
+        }
+        sort(a+1,a+j+1);
+        for(i=1,m=0;i<=j;i++)
+        {
+            m+=a[i];
+            if(m<=k)
+                ans++;
+        }
+        printf("%lld\n",ans);
+    }
+    return 0;
+}
